@@ -1,11 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-function Player({ name, symbol }) {
+// made use of storageKey prop to ensure each instances data isolation 
+// inside the localStorage
+function Player({ name, symbol, storageKey }) {
 	const [playerName, setPlayerName] = useState(name);
 	const [isEdit, setIsEdit] = useState(false);
 
+	useEffect(() => {
+		const storedName = localStorage.getItem(storageKey);
+
+		if(storedName) {
+			console.log('storedName:', storedName);
+			setPlayerName(storedName);
+		}
+	}, []);
+
 	function handleChange(event) {
-		setPlayerName(event.target.value)
+		setPlayerName(() => {
+			localStorage.setItem(storageKey, event.target.value); // update localStorage
+			return event.target.value;
+		});
 	}
 
 	function handleClick() {
