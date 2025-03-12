@@ -11,7 +11,7 @@ function Player({ name, symbol }) {
 	let buttonText = 'Edit';
 
 	if (isEdit) {
-		displaySetName = <input type='text' required />;
+		displaySetName = <input type='text' required value={name} />;
 		buttonText = 'Save';
 	}
 
