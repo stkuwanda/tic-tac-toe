@@ -6,7 +6,7 @@ const initialGameBoard = [
 	[null, null, null],
 ];
 
-function GameBoard() {
+function GameBoard({ onSelectSquare, activePlayerSymbol = 'X'}) {
 	const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
 	function selectedSquareHandler(rowIndex, colIndex) {
@@ -14,9 +14,11 @@ function GameBoard() {
 			// clone board to ensure state update with a new reference.
 			// this is updating the board in an immutable way
 			const updatedBoard = [...prevBoard.map((innerArray) => [...innerArray])];
-			updatedBoard[rowIndex][colIndex] = 'X';
+			updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
 			return updatedBoard;
 		});
+
+		onSelectSquare();
 	}
 
 	return (
