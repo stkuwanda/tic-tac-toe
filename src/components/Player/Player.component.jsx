@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Player({ name, symbol, isActive }) {
+function Player({ name, symbol, isActive, onChangeName }) {
 	const [playerName, setPlayerName] = useState(name);
 	const [isEdit, setIsEdit] = useState(false);
 
@@ -10,6 +10,10 @@ function Player({ name, symbol, isActive }) {
 
 	function handleClick() {
 		setIsEdit((val) => !val);
+
+		if(isEdit) {
+			onChangeName(symbol, playerName);
+		}
 	}
 
 	let displaySetName = <span className='player-name'>{playerName}</span>;
