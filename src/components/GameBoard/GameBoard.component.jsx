@@ -5,23 +5,9 @@ const initialGameBoard = [
 ];
 
 function GameBoard({ onSelectSquare, turns }) {
-	// const [gameBoard, setGameBoard] = useState(initialGameBoard);
-
-	// function selectedSquareHandler(rowIndex, colIndex) {
-	// 	setGameBoard((prevBoard) => {
-	// 		// clone board to ensure state update with a new reference.
-	// 		// this is updating the board in an immutable way
-	// 		const updatedBoard = [...prevBoard.map((innerArray) => [...innerArray])];
-	// 		updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
-	// 		return updatedBoard;
-	// 	});
-
-	// 	onSelectSquare();
-	// }
-
 	let gameBoard = initialGameBoard;
 
-	for(const turn of turns) {
+	for (const turn of turns) {
 		const { square, player } = turn;
 		const { row, col } = square;
 		gameBoard[row][col] = player;
@@ -36,6 +22,7 @@ function GameBoard({ onSelectSquare, turns }) {
 							<li key={colIndex}>
 								<button
 									onClick={() => onSelectSquare(rowIndex, colIndex)}
+									disabled={playerSymbol !== null}
 								>
 									{playerSymbol}
 								</button>
